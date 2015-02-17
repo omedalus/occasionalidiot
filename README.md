@@ -1,7 +1,9 @@
 # Occasional Idiot
 ## Browser plug-in hides your friends' occasional idiotic posts
 
-Your friends are great. You love them. Hell, they're why you're on social media in the first place. But every now and then, they can be total idiots.
+Your friends are great. You love them. Hell, without them you wouldn't even <i>be</i> on social media, right?
+
+But every now and then, they can be total idiots.
 
 Maybe your roommate is an otherwise normal person, except he's obsessed with the Israel/Palestine conflict. Or your hometown BFF has gotten really into homeopathy and Vedic healing. Or that cutie you met at the Duke away game is really cool as long as you don't get her started on LGBTQ issues. Or your buddy from college struck it rich in Silicon Valley and now posts about OWS and the Koch Brothers... from the side of the 1%. Or maybe you just want your girlfriend to stop spilling <i>Game of Thrones</i> spoilers.
 
