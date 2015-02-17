@@ -9,7 +9,7 @@ You don't want to block or unfollow them &mdash; they <i>are</i> still your frie
 
 ### Here's what you do
 
-#### 1. Install <i>Occasional Idiot<i> browser plug-in
+#### 1. Install <i>Occasional Idiot</i> browser plug-in
 
 * Chrome:
 * Firefox:
