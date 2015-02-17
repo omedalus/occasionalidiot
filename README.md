@@ -14,5 +14,5 @@ You don't want to block or unfollow them &mdash; they <i>are</i> still your frie
 * Chrome:
 * Firefox:
 * Safari:
-* IE: (Seriously? No. Just no. WTF is wrong with you?)
+* <strike>IE:</strike> (Seriously? No. Just no. WTF is wrong with you?)
 
