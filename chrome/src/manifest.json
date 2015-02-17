@@ -19,7 +19,10 @@
       "https://www.facebook.com/*"
     ],
     "js": ["occasionalidiot-facebook.js"]
-  }]
+  }],
   
+  "permissions": [
+    "storage"
+  ]
   
 }
