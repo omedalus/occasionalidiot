@@ -2,7 +2,7 @@
   "name": "Occasional Idiot",
   "description": "Hide your friends' occasional idiotic posts",
   "version": "1.0",
-  "manifest_version": 1,
+  "manifest_version": 2,
 
   "icons": {
     "16": "images/icon-16.png",
