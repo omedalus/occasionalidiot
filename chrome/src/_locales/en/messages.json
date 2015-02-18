@@ -42,7 +42,7 @@
   },
 
   "contextMenuViewAllBlacklists": {
-    "message": "View/edit all trigger words that you've blocked",
+    "message": "View/edit all trigger words across all your friends",
     "description": "Context menu that shows the user a blacklist editing interface for all people."
   }
 }
