@@ -8,4 +8,20 @@
     "message": "Occasional Idiot",
     "description": "Title of main context menu for Occasional Idiot browser plug-in."
   }
+
+  "contextMenuHideAllAboutTopic": {
+    "messages": "Hide whenever $PERSON$ talks about \"$TOPIC$\"",
+    "description": "Context menu prompt that comes up when the user has a selected word."
+  }
+
+  "contextMenuHideAllAboutTopic": {
+    "messages": "Add a keyword that you don't want to hear $PERSON$ talk about...",
+    "description": "Context menu that prompts the user to specify a keyword to add to PERSON's blacklist."
+  }
+
+  "contextMenuViewBlacklistForPerson": {
+    "messages": "View/edit all keywords that $PERSON$ shouldn't talk about...",
+    "description": "Context menu that shows the user a blacklist editing interface."
+  }
+
 }

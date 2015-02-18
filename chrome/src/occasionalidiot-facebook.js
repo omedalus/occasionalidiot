@@ -15,11 +15,13 @@ var APP_POST_USER_ATTRNAME = 'occasionalidiot-poster-username';
 // it synced with what the user is clicking on.
 var updateExtensionContext = function(poster, commenter)
 {
-  chrome.runtime.sendMessage({
+  var message = {
     poster: poster,
     commenter: commenter,
     selection: document.getSelection().toString().trim()
-  });
+  };
+  
+  chrome.runtime.sendMessage(message);
 };
 
 // As every node is added to the DOM, check it to see if it's a wall post.
@@ -80,11 +82,6 @@ var processWallPost = function(postNode)
   
   // Look up the blacklist collection.
   chrome.storage.sync.get('blacklist', function(blacklist) {
-    // FAKE BLACKLIST UNTIL SAVING IS IMPLEMENTED
-    blacklist = {};
-    blacklist["Chicks On The Right"] = {words: ['DESPICABLE', 'insane']};
-    // End fake blacklist.
-  
     if (!blacklist || !blacklist[username]) {
       // This poster doesn't have a blacklist.
       return;

@@ -55,12 +55,11 @@ var APP_CONTEXT_MENU_ID = 'occasionalidiot-context-menu';
 chrome.contextMenus.create({
   id: APP_CONTEXT_MENU_ID,
   title: chrome.i18n.getMessage('contextMenuTitle'),
-  contexts: ['page'],
+  contexts: ['page']
 });
 
-
 // Set up a listener to receive messages from the context page.
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   console.log(request);
 });
 
