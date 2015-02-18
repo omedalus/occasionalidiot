@@ -18,13 +18,11 @@ var APP_COMMENT_USER_ATTRNAME = 'occasionalidiot-commenter-username';
 // Send a message to the background task (which runs the context menu) to keep
 // it synced with what the user is clicking on.
 var updateExtensionContext = function(poster, commenter) {
-  console.log(poster);
-  console.log(commenter);
-  
   var message = {
     poster: poster,
     commenter: commenter,
-    selection: document.getSelection().toString().trim()
+    selection: document.getSelection().toString().trim(),
+    contextMenu: true
   };
   
   chrome.runtime.sendMessage(message);

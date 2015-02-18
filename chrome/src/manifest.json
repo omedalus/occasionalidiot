@@ -24,7 +24,8 @@
   
   "permissions": [
     "contextMenus",
-    "storage"
+    "storage",
+    "tabs"
   ],
 
   "background": {

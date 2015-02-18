@@ -44,5 +44,22 @@
   "contextMenuViewAllBlacklists": {
     "message": "View/edit all trigger words across all your friends",
     "description": "Context menu that shows the user a blacklist editing interface for all people."
+  },
+
+  "popupAddWordForPerson": {
+    "message": "Enter a word or phrase that triggers $PERSON$. All posts and comments by $PERSON$ will be deleted from  conversations that include this word.",
+    "description": "Prompt for a popup that allows manually adding blacklist words for a person.",
+    "placeholders": {
+      "PERSON": {
+        "content": "$1",
+        "example": "John M. Doe"
+      }
+    }
+  },
+
+  "popupSampleTriggerWords": {
+    "message": "feminist; climate change; global warming; greenhouse; islam; muslim; terrorist; lgbt; gay; homeopathic; vaccine; autism; republican; israel; student loans; affordable care act; obamacare; abortion; fetus; bailout; tax; home school; occupy",
+    "description": "Semicolon-separated list of sample trigger phrases."
   }
+
 }

@@ -134,7 +134,7 @@ var createCommonMenus = function() {
 };
 
 
-var lastRightClickRequest = null;
+var lastRequest = null;
 
 // Set up a listener to receive messages from the context page.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -147,31 +147,58 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.selection) {
     request.selection = request.selection.trim();
   }
+    
+  lastRequest = request;
   
-  chrome.contextMenus.removeAll();
+  if (request.contextMenu) {
+    chrome.contextMenus.removeAll();
 
-  createPosterMenuItems(request.poster, request.selection);
-  if (request.commenter !== request.poster) {
-    createCommenterMenuItems(request.commenter, request.selection);
+    createPosterMenuItems(request.poster, request.selection);
+    if (request.commenter !== request.poster) {
+      createCommenterMenuItems(request.commenter, request.selection);
+    }
+    
+    createCommonMenus();
   }
-  
-  createCommonMenus();
-  
-  lastRightClickRequest = request;
 });
 
 
+var showAddWordPopup = function(person) {
+  var sampleWord = lastRequest.selection;
+  if (!sampleWord) {
+    var sampleWordsStr = chrome.i18n.getMessage('popupSampleTriggerWords');
+    var sampleWords = sampleWordsStr.split(';');
+    sampleWord = sampleWords[Math.floor(Math.random() * sampleWords.length)];
+  }
+  
+  var word = window.prompt(chrome.i18n.getMessage('popupAddWordForPerson', [person]), 
+      sampleWord.trim());
+
+  editWordOnPersonBlacklist(person, word, true);
+};
+
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
   if (info.menuItemId === CTXMENU_POSTER_SELECTED_TOPIC) {
-    editWordOnPersonBlacklist(lastRightClickRequest.poster,
-        lastRightClickRequest.selection,
+    editWordOnPersonBlacklist(lastRequest.poster,
+        lastRequest.selection,
         true);
   }
-
-  if (info.menuItemId === CTXMENU_COMMENTER_SELECTED_TOPIC) {
-    editWordOnPersonBlacklist(lastRightClickRequest.commenter,
-        lastRightClickRequest.selection,
+  else if (info.menuItemId === CTXMENU_POSTER_CREATE_TOPIC) {
+    showAddWordPopup(lastRequest.poster);
+  }
+  else if (info.menuItemId === CTXMENU_POSTER_VIEW_BLACKLIST) {
+  }
+  else if (info.menuItemId === CTXMENU_COMMENTER_SELECTED_TOPIC) {
+    editWordOnPersonBlacklist(lastRequest.commenter,
+        lastRequest.selection,
         true);
+  }
+  else if (info.menuItemId === CTXMENU_COMMENTER_CREATE_TOPIC) {
+    showAddWordPopup(lastRequest.commenter);
+  }
+  else if (info.menuItemId === CTXMENU_POSTER_VIEW_BLACKLIST) {
+  }
+  else if (info.menuItemId === CTXMENU_VIEW_ALL_BLACKLISTS) {
   }
 });
 
