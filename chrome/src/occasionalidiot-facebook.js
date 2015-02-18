@@ -1,5 +1,6 @@
 // Occasional Idiot
 // Source file for Chrome plugin to handle Facebook integration.
+// Facebook DOM manipulation routines.
 // Copyright (c) 2015 Mikhail Voloshin. All rights reserved.
 
 (function() {
@@ -9,9 +10,6 @@ var FB_BLOCKER_ANCHOR_CLASSNAME = '_52c6';
 
 var APP_POST_DIV_CLASSNAME = 'occasionalidiot-marked-post';
 var APP_POST_USER_ATTRNAME = 'occasionalidiot-poster-username';
-
-var APP_CONTEXT_MENU_ID = 'occasionalidiot-context-menu';
-var APP_CONTEXT_MENU_TITLE = 'Occasional Idiot'; // LOCAL
 
 var currentPoster = null;
 var currentCommenter = null;
@@ -34,7 +32,9 @@ var processWallPost = function(postNode)
     if (anchor.classList.contains(FB_BLOCKER_ANCHOR_CLASSNAME)) {
       // It was a blocker.
       anchor.remove();
-    } else {
+    } else if (!anchor.innerText || anchor.innerText.substr(0, 4) !== 'http') {
+      // Don't textify/dechildify anchors that just contain URLs.
+      
       // Transfer all of the anchor's children to the anchor's parent, as long
       // as they have text (or are text).
       var anchorChildren = anchor.childNodes;
@@ -96,7 +96,7 @@ var processWallPost = function(postNode)
 };
 
 document.addEventListener('DOMNodeInserted', function(event) {
-  try {
+  //try {
     var node = event.relatedNode;
 
     if (node.classList.contains(FB_POST_DIV_CLASSNAME)) {
@@ -112,15 +112,10 @@ document.addEventListener('DOMNodeInserted', function(event) {
         processWallPost(postNode);
       }
     }    
-  } catch (ex) {
-    return;
-  }
+  //} catch (ex) {
+    //return;
+  //}
 });
-
-// Set up the context menus.
-console.log('hiiii');
-debugger;
-chrome.contextMenus.create({"title": "Test parent item"});
 
 })();
 

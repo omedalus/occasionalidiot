@@ -1,3 +1,11 @@
+// Occasional Idiot
+// Source file for Chrome plugin to handle Facebook integration.
+// Background and context menu tasks.
+// Copyright (c) 2015 Mikhail Voloshin. All rights reserved.
+
+
+/*
+
 // Copyright (c) 2013 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -40,9 +48,13 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
     setOpeningIds(ids);
   });
 });
+*/
+
+var APP_CONTEXT_MENU_ID = 'occasionalidiot-context-menu';
+
 
 chrome.contextMenus.create({
-  id: 'open',
-  title: chrome.i18n.getMessage('openContextMenuTitle'),
-  contexts: ['link'],
+  id: APP_CONTEXT_MENU_ID,
+  title: chrome.i18n.getMessage('contextMenuTitle'),
+  contexts: ['page'],
 });

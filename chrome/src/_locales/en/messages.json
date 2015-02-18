@@ -1,9 +1,6 @@
-{"extName": {
-   "message": "Download and Open Button",
-   "description": "Extension name"},
- "extDesc": {
-   "message": "Download and Open Context Menu Button",
-   "description": "Extension description"},
- "openContextMenuTitle": {
-   "message": "Download and Open",
-   "description": "context menu button text"}}
+{
+  "contextMenuTitle": {
+    "message": "Occasional Idiot",
+    "description": "Title of main context menu for Occasional Idiot browser plug-in."
+  }
+}
