@@ -1,4 +1,9 @@
 {
+  "hyperlinkReplacementText": {
+    "message": "Read the full story...",
+    "description": "Replacement text for hyperlinks that get removed by the plug-in."
+  },
+
   "contextMenuTitle": {
     "message": "Occasional Idiot",
     "description": "Title of main context menu for Occasional Idiot browser plug-in."

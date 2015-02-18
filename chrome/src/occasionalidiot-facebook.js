@@ -11,8 +11,16 @@ var FB_BLOCKER_ANCHOR_CLASSNAME = '_52c6';
 var APP_POST_DIV_CLASSNAME = 'occasionalidiot-marked-post';
 var APP_POST_USER_ATTRNAME = 'occasionalidiot-poster-username';
 
-var currentPoster = null;
-var currentCommenter = null;
+// Send a message to the background task (which runs the context menu) to keep
+// it synced with what the user is clicking on.
+var updateExtensionContext = function(poster, commenter)
+{
+  chrome.runtime.sendMessage({
+    poster: poster,
+    commenter: commenter,
+    selection: document.getSelection().toString().trim()
+  });
+};
 
 // As every node is added to the DOM, check it to see if it's a wall post.
 var processWallPost = function(postNode)
@@ -29,10 +37,14 @@ var processWallPost = function(postNode)
       continue;
     }
 
+    var replacementText = chrome.i18n.getMessage('hyperlinkReplacementText');
+    
     if (anchor.classList.contains(FB_BLOCKER_ANCHOR_CLASSNAME)) {
-      // It was a blocker.
-      anchor.remove();
-    } else if (!anchor.innerText || anchor.innerText.substr(0, 4) !== 'http') {
+      anchor.classList.remove(FB_BLOCKER_ANCHOR_CLASSNAME);
+      anchor.innerHTML = replacementText;
+      anchor.previousSibling.appendChild(anchor);
+      
+    } else if (anchor.innerText !== replacementText && anchor.innerText.substr(0, 4) !== 'http') {
       // Don't textify/dechildify anchors that just contain URLs.
       
       // Transfer all of the anchor's children to the anchor's parent, as long
@@ -57,11 +69,12 @@ var processWallPost = function(postNode)
   postNode.classList.add(APP_POST_DIV_CLASSNAME);
   postNode.setAttribute(APP_POST_USER_ATTRNAME, username);
   
+  // Set up event handling so that the background task (which runs the context
+  // menu) knows which user was right-clicked on.
   postNode.addEventListener('mousedown', function(event) {
     if (event.button === 2) {
       // Right click.
-      currentCommenter = username;
-      console.log(currentCommenter);
+      updateExtensionContext(username, null);
     }
   });
   
