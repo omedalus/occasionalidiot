@@ -4,11 +4,6 @@
     "description": "Replacement text for hyperlinks that get removed by the plug-in."
   },
 
-  "contextMenuTitle": {
-    "message": "Occasional Idiot",
-    "description": "Title of main context menu for Occasional Idiot browser plug-in."
-  },
-
   "contextMenuHideAllAboutTopic": {
     "message": "Hide whenever $PERSON$ talks about \"$TOPIC$\"",
     "description": "Context menu prompt that comes up when the user has a selected word.",
@@ -24,7 +19,7 @@
     }
   },
 
-  "contextMenuHideAllAboutTopic": {
+  "contextMenuCreateTopic": {
     "message": "Add a trigger word that $PERSON$ shouldn't talk about...",
     "description": "Context menu that prompts the user to specify a keyword to add to PERSON's blacklist.",
     "placeholders": {
@@ -47,7 +42,7 @@
   },
 
   "contextMenuViewAllBlacklists": {
-    "message": "View/edit all trigger words for all your friends",
+    "message": "View/edit all trigger words that you've blocked",
     "description": "Context menu that shows the user a blacklist editing interface for all people."
   }
 }

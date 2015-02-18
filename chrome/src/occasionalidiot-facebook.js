@@ -67,21 +67,26 @@ var processWallPost = function(postNode)
       getElementsByTagName('a')[0].
       innerText.trim();
       
-  // Annotate this element so our lookup can be much faster next time.
-  postNode.classList.add(APP_POST_DIV_CLASSNAME);
-  postNode.setAttribute(APP_POST_USER_ATTRNAME, username);
-  
-  // Set up event handling so that the background task (which runs the context
-  // menu) knows which user was right-clicked on.
-  postNode.addEventListener('mousedown', function(event) {
-    if (event.button === 2) {
-      // Right click.
-      updateExtensionContext(username, null);
-    }
-  });
+  // Annotate this element so our lookup can be much faster next time,
+  // and wire up event handlers.
+  if (!postNode.classList.contains(APP_POST_DIV_CLASSNAME)) {
+    postNode.classList.add(APP_POST_DIV_CLASSNAME);
+    postNode.setAttribute(APP_POST_USER_ATTRNAME, username);
+    
+    // Set up event handling so that the background task (which runs the context
+    // menu) knows which user was right-clicked on.
+    postNode.addEventListener('mousedown', function(event) {
+      if (event.button === 2) {
+        // Right click.
+        updateExtensionContext(username, null);
+      }
+    });
+  }
   
   // Look up the blacklist collection.
-  chrome.storage.sync.get('blacklist', function(blacklist) {
+  chrome.storage.sync.get('blacklist', function(response) {
+    var blacklist = response.blacklist;
+    
     if (!blacklist || !blacklist[username]) {
       // This poster doesn't have a blacklist.
       return;
@@ -92,10 +97,8 @@ var processWallPost = function(postNode)
     var allPostText = postNode.innerText.toUpperCase();
     var userBlacklistWords = blacklist[username].words;
     
-    for (var iBlacklistWord = 0; 
-        iBlacklistWord < userBlacklistWords.length; 
-        iBlacklistWord++) {
-      var blacklistWord = userBlacklistWords[iBlacklistWord].toUpperCase();
+    for (var key in  userBlacklistWords) {
+      var blacklistWord = key.toUpperCase();
       if (allPostText.indexOf(blacklistWord) != -1) {
         // The post or one of its comments contains a word that's been
         // blacklisted for the original poster. Kill the whole post.
@@ -103,6 +106,19 @@ var processWallPost = function(postNode)
       }
     }
   });
+};
+
+var reprocessPage = function() {
+  // Process posts.
+  var postNodes = document.getElementsByClassName(FB_POST_DIV_CLASSNAME);
+  for (var iPostNode = 0; iPostNode < postNodes.length; iPostNode++) {
+    var postNode = postNodes[iPostNode];
+    if (!postNode) {
+      continue;
+    }
+    
+    processWallPost(postNode);
+  }
 };
 
 document.addEventListener('DOMNodeInserted', function(event) {
@@ -127,5 +143,17 @@ document.addEventListener('DOMNodeInserted', function(event) {
   //}
 });
 
-})();
+// Set up a listener to receive messages from extension.
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.reprocessPage) {
+    reprocessPage();
+  }
+});
 
+
+
+
+
+chrome.storage.sync.clear();
+
+})();
