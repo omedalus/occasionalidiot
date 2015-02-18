@@ -1,0 +1,29 @@
+body {
+  color: #444;
+  font-family: Arial;
+  margin: auto;
+  padding: 20px 0;
+  width: 640px;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: 80px;
+  margin: 0;
+  text-shadow: 1px 1px 0 #ccc;
+}
+
+header p {
+  color: #888;
+  font-weight: bold;
+  margin-top: .5em;
+}
+
+.logo {
+  background: url('images/icon-128.png');
+  display: inline-block;
+  float: left;
+  height: 128px;
+  margin-right: 20px;
+  width: 128px;
+}
