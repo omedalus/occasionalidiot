@@ -7,21 +7,47 @@
   "contextMenuTitle": {
     "message": "Occasional Idiot",
     "description": "Title of main context menu for Occasional Idiot browser plug-in."
-  }
+  },
 
   "contextMenuHideAllAboutTopic": {
-    "messages": "Hide whenever $PERSON$ talks about \"$TOPIC$\"",
-    "description": "Context menu prompt that comes up when the user has a selected word."
-  }
+    "message": "Hide whenever $PERSON$ talks about \"$TOPIC$\"",
+    "description": "Context menu prompt that comes up when the user has a selected word.",
+    "placeholders": {
+      "PERSON": {
+        "content": "$1",
+        "example": "John M. Doe"
+      },
+      "TOPIC": {
+        "content": "$2",
+        "example": "global warming"
+      }
+    }
+  },
 
   "contextMenuHideAllAboutTopic": {
-    "messages": "Add a keyword that you don't want to hear $PERSON$ talk about...",
-    "description": "Context menu that prompts the user to specify a keyword to add to PERSON's blacklist."
-  }
+    "message": "Add a trigger word that $PERSON$ shouldn't talk about...",
+    "description": "Context menu that prompts the user to specify a keyword to add to PERSON's blacklist.",
+    "placeholders": {
+      "PERSON": {
+        "content": "$1",
+        "example": "John M. Doe"
+      }
+    }
+  },
 
   "contextMenuViewBlacklistForPerson": {
-    "messages": "View/edit all keywords that $PERSON$ shouldn't talk about...",
-    "description": "Context menu that shows the user a blacklist editing interface."
-  }
+    "message": "View/edit all trigger words that $PERSON$ shouldn't talk about",
+    "description": "Context menu that shows the user a blacklist editing interface for a specific person.",
+    "placeholders": {
+      "PERSON": {
+        "content": "$1",
+        "example": "John M. Doe"
+      }
+    }
+  },
 
+  "contextMenuViewAllBlacklists": {
+    "message": "View/edit all trigger words for all your friends",
+    "description": "Context menu that shows the user a blacklist editing interface for all people."
+  }
 }
