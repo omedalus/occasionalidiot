@@ -14,9 +14,6 @@ var commandAllContentReload = function() {
 
 
 var editWordOnPersonBlacklist = function(person, word, isKeeping) {
-  console.log('Adding ' + word + ' to ' + person);
-  
-    // Look up the blacklist collection.
   chrome.storage.sync.get('blacklist', function(blacklist) {
     if (!blacklist) {
       blacklist = {};
@@ -52,7 +49,12 @@ var CTXMENU_POSTER_CREATE_TOPIC = 'poster-create-topic';
 var CTXMENU_POSTER_VIEW_BLACKLIST = 'poster-view-blacklist';
 var CTXMENU_POSTER_SEPARATOR = 'poster-separator';
 
-CTXMENU_POSTER_VIEW_ALL_BLACKLISTS = 'all-blacklists';
+var CTXMENU_COMMENTER_SELECTED_TOPIC = 'commenter-selected-topic';
+var CTXMENU_COMMENTER_CREATE_TOPIC = 'commenter-create-topic';
+var CTXMENU_COMMENTER_VIEW_BLACKLIST = 'commenter-view-blacklist';
+var CTXMENU_COMMENTER_SEPARATOR = 'commenter-separator';
+
+var CTXMENU_VIEW_ALL_BLACKLISTS = 'all-blacklists';
 
 
 var createPosterMenuItems = function(poster, selection) {
@@ -86,12 +88,46 @@ var createPosterMenuItems = function(poster, selection) {
     type: 'separator',
     contexts: ['all']
   });
-}
+};
+
+
+var createCommenterMenuItems = function(commenter, selection) {
+  if (!commenter) {
+    return;
+  }
+  
+  if (!!selection) {
+    chrome.contextMenus.create({
+      id: CTXMENU_COMMENTER_SELECTED_TOPIC,
+      title: chrome.i18n.getMessage('contextMenuHideAllAboutTopic',
+          [commenter, selection]),
+      contexts: ['all']
+    });
+  }
+
+  chrome.contextMenus.create({
+    id: CTXMENU_COMMENTER_CREATE_TOPIC,
+    title: chrome.i18n.getMessage('contextMenuCreateTopic', [commenter]),
+    contexts: ['all']
+  });
+
+  chrome.contextMenus.create({
+    id: CTXMENU_COMMENTER_VIEW_BLACKLIST,
+    title: chrome.i18n.getMessage('contextMenuViewBlacklistForPerson', [commenter]),
+    contexts: ['all']
+  });
+
+  chrome.contextMenus.create({
+    id: CTXMENU_COMMENTER_SEPARATOR,
+    type: 'separator',
+    contexts: ['all']
+  });
+};
 
 
 var createCommonMenus = function() {
   chrome.contextMenus.create({
-    id: CTXMENU_POSTER_VIEW_ALL_BLACKLISTS,
+    id: CTXMENU_VIEW_ALL_BLACKLISTS,
     title: chrome.i18n.getMessage('contextMenuViewAllBlacklists'),
     contexts: ['all']
   });
@@ -115,6 +151,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   chrome.contextMenus.removeAll();
 
   createPosterMenuItems(request.poster, request.selection);
+  if (request.commenter !== request.poster) {
+    createCommenterMenuItems(request.commenter, request.selection);
+  }
+  
   createCommonMenus();
   
   lastRightClickRequest = request;
@@ -124,6 +164,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
   if (info.menuItemId === CTXMENU_POSTER_SELECTED_TOPIC) {
     editWordOnPersonBlacklist(lastRightClickRequest.poster,
+        lastRightClickRequest.selection,
+        true);
+  }
+
+  if (info.menuItemId === CTXMENU_COMMENTER_SELECTED_TOPIC) {
+    editWordOnPersonBlacklist(lastRightClickRequest.commenter,
         lastRightClickRequest.selection,
         true);
   }

@@ -5,7 +5,7 @@
   },
 
   "contextMenuHideAllAboutTopic": {
-    "message": "Hide whenever $PERSON$ talks about \"$TOPIC$\"",
+    "message": "Hide $PERSON$ from conversations involving \"$TOPIC$\"",
     "description": "Context menu prompt that comes up when the user has a selected word.",
     "placeholders": {
       "PERSON": {
@@ -20,7 +20,7 @@
   },
 
   "contextMenuCreateTopic": {
-    "message": "Add a trigger word that $PERSON$ shouldn't talk about...",
+    "message": "Add a trigger word that $PERSON$ shouldn't talk about",
     "description": "Context menu that prompts the user to specify a keyword to add to PERSON's blacklist.",
     "placeholders": {
       "PERSON": {
