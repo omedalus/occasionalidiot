@@ -30,7 +30,7 @@ var updateExtensionContext = function(poster, commenter) {
 
 // As every node is added to the DOM, check it to see if it's a wall post.
 var processWallPost = function(postNode) {
-  //try {
+  try {
     // First thing we do is delete the blocking anchor tags.
     // FB uses them for movement tracking, but they interfere with the user's
     // ability to highlight and select text.
@@ -117,13 +117,13 @@ var processWallPost = function(postNode) {
     }
 
     processAllChildCommentNodes(postNode);
-  //} catch(ex) {
-  //}
+  } catch(ex) {
+  }
 };
 
 
 var processComment = function(commentNode) {
-  //try {
+  try {
     var commenter = commentNode.getElementsByClassName(
         FB_COMMENTER_SPAN_CLASSNAME)[0].innerText.trim();
 
@@ -196,8 +196,8 @@ var processComment = function(commentNode) {
     });
 
     
-  //} catch (ex) {
-  //}
+  } catch (ex) {
+  }
 };
 
 
@@ -247,12 +247,12 @@ var reprocessPage = function() {
 };
 
 document.addEventListener('DOMNodeInserted', function(event) {
-  //try {
+  try {
     processAllChildNodes(event.relatedNode);
 
-  //} catch (ex) {
-  //  return;
-  //}
+  } catch (ex) {
+    return;
+  }
 });
 
 // Set up a listener to receive messages from extension.
@@ -261,11 +261,5 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     reprocessPage();
   }
 });
-
-
-
-
-
-chrome.storage.sync.clear();
 
 })();

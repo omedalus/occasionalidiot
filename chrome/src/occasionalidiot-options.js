@@ -75,6 +75,27 @@ occasionalIdiotApp.run(['$rootScope', function($rootScope) {
     });
   };
 
+  $rootScope.deleteWord = function(word) {
+    if (!word || !word.word || !word.friend) {
+      return;
+    }
+  
+    chrome.storage.sync.get('blacklist', function(response) {
+    console.log(response);
+    
+      blacklist = response.blacklist;
+        if (!blacklist[word.friend]
+            || !blacklist[word.friend].words[word.word]) {
+          return;
+        }
+        
+        delete blacklist[word.friend].words[word.word];
+        chrome.storage.sync.set({blacklist: blacklist}, function() {
+          loadStorage();
+        });
+    });
+  };
+
   loadStorage();
 }]);
 

@@ -36,6 +36,7 @@
               data-ng-if="word.friend == currentFriend.name || currentFriend == allFriend">
             <td>{{word.friend}}</td>
             <td>{{word.word}}</td>
+            <td><div class="delword" data-ng-click="deleteWord(word)"></div></td>
           </tr>
         </tbody>
       </table>
