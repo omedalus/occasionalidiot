@@ -33,6 +33,12 @@
       "https://twitter.com/*"
     ],
     "js": ["occasionalidiot-twitter.js"]
+  }, {
+    "matches": [
+      "http://*.tumblr.com/*",
+      "https://*.tumblr.com/*"
+    ],
+    "js": ["occasionalidiot-tumblr.js"]
   }],
   
   "permissions": [
