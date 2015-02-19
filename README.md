@@ -24,8 +24,22 @@ You don't want to unfollow or block them &mdash; they <i>are</i> still your frie
 * Tumblr
 * Google+
 
-#### 3. Spot one of your friends being an idiot on your wall
+#### 3. Spot one of your friends being an idiot
 
+Whenever a friend of yours posts something that you really don't want to hear their opinion about...
+* On your wall
+* On their wall
+* In the comments to another post
+
+!["Screenshot from Facebook showing user John M. Doe posting links about vaccines and chemtrails"](/gfx/sampleworkflow/screenshot-fb-vaccines.png?raw=true "'Great, there goes John about vaccines again.'")
+
+#### 4. Highlight a trigger word
+
+Select a word or phrase from their post or comments that indicates that your friend is talking about one of their personal nutcase topics.
+
+!["Same screenshot as before, but with the word 'Vaccine' selected."](/gfx/sampleworkflow/screenshot-fb-vaccines-highlight.png?raw=true "'Let's mark 'Vaccine' as one of John's trigger words...'")
+
+#### 5. 
 
 
 
