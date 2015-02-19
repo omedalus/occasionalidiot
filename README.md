@@ -39,7 +39,11 @@ Select a word or phrase from their post or comments that indicates that your fri
 
 !["Same screenshot as before, but with the word 'Vaccine' selected."](/gfx/sampleworkflow/screenshot-fb-vaccines-highlight.png?raw=true "'Let's mark 'Vaccine' as one of John's trigger words...'")
 
-#### 5. 
+#### 5. Right-click and use the <i>Occasional Idiot</i> menu
+
+The default option is to mark the selected word as a trigger word of your friend. Other options include explicitly typing in your friend's trigger words, or seeing the full list of words that you've marked as triggers for your friend.
+
+!["Screenshot from Facebook with the 'Occasional Idiot' plug-in context menu, selecting the option 'Hide John M. Doe from conversations involving 'Vaccine'."](/gfx/sampleworkflow/screenshot-fb-vaccines-highlight.png?raw=true "Marking 'Vaccine' as a trigger word for John McNobody Doe.")
 
 
 
