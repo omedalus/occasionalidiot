@@ -1,4 +1,6 @@
-# Occasional Idiot
+
+# Occasional Idiot <img src="/gfx/icon-128.png" align="right"/>
+
 ## Browser plug-in hides your friends' occasional idiotic posts
 
 Your friends are great. You love them. But every now and then, they can be total idiots.
