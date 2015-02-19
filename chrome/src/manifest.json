@@ -21,6 +21,12 @@
       "https://www.facebook.com/*"
     ],
     "js": ["occasionalidiot-facebook.js"]
+  }, {
+    "matches": [
+      "http://plus.google.com/*",
+      "https://plus.google.com/*"
+    ],
+    "js": ["occasionalidiot-gplus.js"]
   }],
   
   "permissions": [
