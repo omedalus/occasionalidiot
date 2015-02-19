@@ -27,6 +27,12 @@
       "https://plus.google.com/*"
     ],
     "js": ["occasionalidiot-gplus.js"]
+  }, {
+    "matches": [
+      "http://twitter.com/*",
+      "https://twitter.com/*"
+    ],
+    "js": ["occasionalidiot-twitter.js"]
   }],
   
   "permissions": [

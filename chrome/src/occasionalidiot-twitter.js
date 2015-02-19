@@ -5,9 +5,9 @@
 
 (function() {
 
-var TWITTER_POST_DIV_CLASSNAME = 'Ee';
-var TWITTER_COMMENT_DIV_CLASSNAME = 'Jx';
-var TWITTER_PERSON_LINK_CLASSNAME = 'tv';
+var TWITTER_POST_DIV_CLASSNAME = 'js-stream-item';
+var TWITTER_COMMENT_DIV_CLASSNAME = 'js-simple-tweet';
+var TWITTER_PERSON_LINK_CLASSNAME = 'fullname';
 
 var APP_POST_DIV_CLASSNAME = 'occasionalidiot-marked-post';
 var APP_POST_USER_ATTRNAME = 'occasionalidiot-poster-username';
