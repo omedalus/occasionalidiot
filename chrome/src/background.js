@@ -15,6 +15,11 @@ var commandAllContentReload = function(reload) {
 
 
 var editWordOnPersonBlacklist = function(person, word, isKeeping) {
+  word = word.trim();
+  if (!word || !word.length) {
+    return;
+  }
+  
   chrome.storage.sync.get('blacklist', function(response) {
     var blacklist = response.blacklist;
 

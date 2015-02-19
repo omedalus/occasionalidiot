@@ -21,6 +21,10 @@
     
     <article>
       <div class="controlbar">
+        <button class="deleteall" data-ng-click="deleteAll()">
+          Delete all
+        </button>
+      
         <select data-ng-model="currentFriend"
             data-ng-options="friend as friend.name for friend in appFriends"></select>
       </div>

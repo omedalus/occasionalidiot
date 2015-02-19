@@ -40,6 +40,10 @@ article {
   width: 300px;
 }
 
+.controlbar .deleteall {
+  float: right;
+}
+
 table {
   cursor: default;
   border-collapse: collapse;

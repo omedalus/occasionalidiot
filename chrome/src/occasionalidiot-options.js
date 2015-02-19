@@ -68,7 +68,7 @@ occasionalIdiotApp.run(['$location', '$rootScope',
 
   var loadStorage = function(fnListLoaded) {
     chrome.storage.sync.get('blacklist', function(response) {
-      blacklist = response.blacklist;
+      blacklist = response.blacklist || {};
       fnListLoaded && fnListLoaded();
 
       updateFriends();
@@ -100,6 +100,15 @@ occasionalIdiotApp.run(['$location', '$rootScope',
         chrome.runtime.sendMessage({reload: true});
       });
     });
+  };
+  
+  $rootScope.deleteAll = function() {
+    if (window.confirm('You are about to clear all data from this plug-in. Are you sure?')) {
+      chrome.storage.sync.clear(function() {
+        loadStorage();
+        chrome.runtime.sendMessage({reload: true});
+      });
+    }
   };
 
   // Set up a listener to receive messages from extension.
