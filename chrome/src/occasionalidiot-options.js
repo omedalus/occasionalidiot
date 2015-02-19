@@ -105,6 +105,7 @@ occasionalIdiotApp.run(['$location', '$rootScope',
   $rootScope.deleteAll = function() {
     if (window.confirm('You are about to clear all data from this plug-in. Are you sure?')) {
       chrome.storage.sync.clear(function() {
+        $rootScope.currentFriend = null;
         loadStorage();
         chrome.runtime.sendMessage({reload: true});
       });
