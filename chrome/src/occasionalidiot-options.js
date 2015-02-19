@@ -27,11 +27,15 @@ occasionalIdiotApp.run(['$location', '$rootScope',
       friendObjList.push(blacklist[name]);
     }
 
-    if (!$rootScope.currentFriend ||
-        !blacklist[$rootScope.currentFriend.name]) {
+    if (!$rootScope.currentFriend) {
       $rootScope.currentFriend = allFriend;
     } else {
-      $rootScope.currentFriend = blacklist[$rootScope.currentFriend.name];
+      var reindexedCurrentFriend = blacklist[$rootScope.currentFriend.name];
+      if (reindexedCurrentFriend) {
+        $rootScope.currentFriend = reindexedCurrentFriend;
+      } else {
+        friendObjList.push($rootScope.currentFriend);
+      }
     }
 
     $rootScope.appFriends = friendObjList;
@@ -64,15 +68,11 @@ occasionalIdiotApp.run(['$location', '$rootScope',
 
   var loadStorage = function(fnListLoaded) {
     chrome.storage.sync.get('blacklist', function(response) {
-    console.log(response);
-    
       blacklist = response.blacklist;
       fnListLoaded && fnListLoaded();
-      console.log('callbacked');
 
       updateFriends();
       updateWords();
-      console.log('applying scope');
       $rootScope.$apply();
     });
   };
@@ -115,6 +115,9 @@ occasionalIdiotApp.run(['$location', '$rootScope',
       return;
     }
     $rootScope.currentFriend = blacklist[urlfriend];
+    if (!$rootScope.currentFriend) {
+      $rootScope.currentFriend = {name: urlfriend};
+    }
   });
 }]);
 
