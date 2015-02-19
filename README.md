@@ -57,8 +57,9 @@ Poof! All gone! <i>Occasional Idiot</i> will invisibly hide your friend from any
 * Your friend chimes in with a comment on a thread where the original post used the trigger
 * Anybody else posts a comment with the trigger hoping to goad your friend into an off-topic rant 
 
-!["Screenshot from Facebook, just like the original but with the vaccines post missing."](/gfx/sampleworkflow/screenshot-fb-no-more-vaccines.png?raw=true "'Much better! Now, to get him to shut up about chemtrails and the Greece bailouts...'")
+!["Screenshot from Facebook, just like the original but with the vaccines post missing."](/gfx/sampleworkflow/screenshot-fb-no-more-vaccines.png?raw=true "'No more posts from John about vaccines! Much better! Now, to get him to shut up about chemtrails and the Greece bailouts...'")
 
 
+### <i>Your</i> social feed. <i>Your</i> friends. <i>Your</i> truth. <i>Your</i> choice.
 
-
+With <i>Occasional Idiot</i>, your friends and their toxic beliefs no longer have to be a package deal. You no longer have to decide between your friends and your convictions &mdash; now you can be true to both! Whether you find this new capability to be merely a passing convenience or a profound change to your browsing habits, <i>Occasional Idiot</i> is sure to be a worthwhile enhancement to your social media experience.
