@@ -6,7 +6,7 @@
 (function() {
 
 var GPLUS_POST_DIV_CLASSNAME = 'Ee';
-var GPLUS_COMMENT_DIV_CLASSNAME = 'Jx';
+var GPLUS_COMMENT_DIV_CLASSNAME = 'Ik';
 var GPLUS_PERSON_LINK_CLASSNAME = 'tv';
 
 var APP_POST_DIV_CLASSNAME = 'occasionalidiot-marked-post';

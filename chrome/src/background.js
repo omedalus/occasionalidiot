@@ -75,26 +75,26 @@ var createPosterMenuItems = function(poster, selection) {
       id: CTXMENU_POSTER_SELECTED_TOPIC,
       title: chrome.i18n.getMessage('contextMenuHideAllAboutTopic',
           [poster, selection]),
-      contexts: ['all']
+      contexts: ['page', 'selection']
     });
   }
 
   chrome.contextMenus.create({
     id: CTXMENU_POSTER_CREATE_TOPIC,
     title: chrome.i18n.getMessage('contextMenuCreateTopic', [poster]),
-    contexts: ['all']
+    contexts: ['page', 'selection']
   });
 
   chrome.contextMenus.create({
     id: CTXMENU_POSTER_VIEW_BLACKLIST,
     title: chrome.i18n.getMessage('contextMenuViewBlacklistForPerson', [poster]),
-    contexts: ['all']
+    contexts: ['page', 'selection']
   });
 
   chrome.contextMenus.create({
     id: CTXMENU_POSTER_SEPARATOR,
     type: 'separator',
-    contexts: ['all']
+    contexts: ['page', 'selection']
   });
 };
 
@@ -109,26 +109,26 @@ var createCommenterMenuItems = function(commenter, selection) {
       id: CTXMENU_COMMENTER_SELECTED_TOPIC,
       title: chrome.i18n.getMessage('contextMenuHideAllAboutTopic',
           [commenter, selection]),
-      contexts: ['all']
+      contexts: ['page', 'selection']
     });
   }
 
   chrome.contextMenus.create({
     id: CTXMENU_COMMENTER_CREATE_TOPIC,
     title: chrome.i18n.getMessage('contextMenuCreateTopic', [commenter]),
-    contexts: ['all']
+    contexts: ['page', 'selection']
   });
 
   chrome.contextMenus.create({
     id: CTXMENU_COMMENTER_VIEW_BLACKLIST,
     title: chrome.i18n.getMessage('contextMenuViewBlacklistForPerson', [commenter]),
-    contexts: ['all']
+    contexts: ['page', 'selection']
   });
 
   chrome.contextMenus.create({
     id: CTXMENU_COMMENTER_SEPARATOR,
     type: 'separator',
-    contexts: ['all']
+    contexts: ['page', 'selection']
   });
 };
 
@@ -137,7 +137,7 @@ var createCommonMenus = function() {
   chrome.contextMenus.create({
     id: CTXMENU_VIEW_ALL_BLACKLISTS,
     title: chrome.i18n.getMessage('contextMenuViewAllBlacklists'),
-    contexts: ['all']
+    contexts: ['page', 'selection']
   });
 };
 
