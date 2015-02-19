@@ -6,7 +6,8 @@
 
 var occasionalIdiotApp = angular.module('occasionalidiot', []);
 
-occasionalIdiotApp.run(['$rootScope', function($rootScope) {
+occasionalIdiotApp.run(['$location', '$rootScope',
+    function($location, $rootScope) {
   var blacklist = {};
 
   var allFriend = {name: 'All friends'};
@@ -29,21 +30,17 @@ occasionalIdiotApp.run(['$rootScope', function($rootScope) {
     if (!$rootScope.currentFriend ||
         !blacklist[$rootScope.currentFriend.name]) {
       $rootScope.currentFriend = allFriend;
+    } else {
+      $rootScope.currentFriend = blacklist[$rootScope.currentFriend.name];
     }
 
     $rootScope.appFriends = friendObjList;
   };
 
   var updateWords = function() {
-    var friends = [$rootScope.currentFriend];
-    if (!$rootScope.currentFriend ||
-        $rootScope.currentFriend === allFriend) {
-      friends = $rootScope.appFriends;
-    }
-
     var words = [];
-    for (var iFriend in friends) {
-      var friend = friends[iFriend];
+    for (var iFriend in $rootScope.appFriends) {
+      var friend = $rootScope.appFriends[iFriend];
 
       if (!friend.words) {
         continue;
@@ -62,15 +59,20 @@ occasionalIdiotApp.run(['$rootScope', function($rootScope) {
         });
       }
     }
-
     $rootScope.appWords = words;
   };
 
-  var loadStorage = function() {
+  var loadStorage = function(fnListLoaded) {
     chrome.storage.sync.get('blacklist', function(response) {
+    console.log(response);
+    
       blacklist = response.blacklist;
+      fnListLoaded && fnListLoaded();
+      console.log('callbacked');
+
       updateFriends();
       updateWords();
+      console.log('applying scope');
       $rootScope.$apply();
     });
   };
@@ -81,19 +83,22 @@ occasionalIdiotApp.run(['$rootScope', function($rootScope) {
     }
   
     chrome.storage.sync.get('blacklist', function(response) {
-    console.log(response);
-    
       blacklist = response.blacklist;
-        if (!blacklist[word.friend]
-            || !blacklist[word.friend].words[word.word]) {
-          return;
-        }
-        
-        delete blacklist[word.friend].words[word.word];
-        chrome.storage.sync.set({blacklist: blacklist}, function() {
-          loadStorage();
-          chrome.runtime.sendMessage({reload: true});
-        });
+      if (!blacklist[word.friend]
+          || !blacklist[word.friend].words[word.word]) {
+        loadStorage();
+        return;
+      }
+      
+      delete blacklist[word.friend].words[word.word];
+      if (!Object.keys(blacklist[word.friend].words).length) {
+        delete blacklist[word.friend];
+      }
+      
+      chrome.storage.sync.set({blacklist: blacklist}, function() {
+        loadStorage();
+        chrome.runtime.sendMessage({reload: true});
+      });
     });
   };
 
@@ -104,7 +109,13 @@ occasionalIdiotApp.run(['$rootScope', function($rootScope) {
     }
   });
 
-  loadStorage();
+  loadStorage(function() {
+    var urlfriend = $location.search().friend;
+    if (!urlfriend) {
+      return;
+    }
+    $rootScope.currentFriend = blacklist[urlfriend];
+  });
 }]);
 
 

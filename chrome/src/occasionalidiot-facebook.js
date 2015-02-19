@@ -162,7 +162,7 @@ var processComment = function(commentNode) {
           event.stopPropagation(); 
         }
       });
-      
+
       if (postNode) {
         commentNode.occasionalIdiotPostNode = postNode;
       }
@@ -176,15 +176,15 @@ var processComment = function(commentNode) {
         // This commenter doesn't have a blacklist.
         return;
       }
-      
+
       // Gather up all the post's text and comments 
       // (or at least currently available comments).
       var nodeToTextify = !!commentNode.occasionalIdiotPostNode ?
           commentNode.occasionalIdiotPostNode : commentNode;
-      
+
       var allText = nodeToTextify.innerText.toUpperCase();
       var commenterBlacklistWords = blacklist[commenter].words;
-      
+
       for (var key in  commenterBlacklistWords) {
         var blacklistWord = key.toUpperCase();
         if (allText.indexOf(blacklistWord) != -1) {
@@ -194,8 +194,6 @@ var processComment = function(commentNode) {
         }
       }
     });
-
-    
   } catch (ex) {
   }
 };
@@ -211,7 +209,7 @@ var processAllChildPostNodes = function(node) {
       if (!postNode) {
         continue;
       }
-      
+
       processWallPost(postNode);
     }
   }
@@ -242,8 +240,6 @@ var processAllChildNodes = function(node) {
 
 
 var reprocessPage = function() {
-  console.log('reprocessing page');
-
   // Process posts.
   processAllChildNodes(document);
 };

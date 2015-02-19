@@ -190,7 +190,7 @@ var APP_OPTIONS_PAGE_URL = 'occasionalidiot-options.html';
 
 var showOptionsPage = function(person) {
   chrome.tabs.create({
-    url: APP_OPTIONS_PAGE_URL
+    url: APP_OPTIONS_PAGE_URL + '#?friend=' + encodeURIComponent(person)
   }, function(tab) {
   
   });
