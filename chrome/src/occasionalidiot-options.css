@@ -15,10 +15,18 @@ h1 {
   text-shadow: 1px 1px 0 #ccc;
 }
 
+header {
+  background: white;
+  position: fixed;
+  top: 0;
+  width: 640px;
+}
+
 header p {
   color: #888;
   font-weight: bold;
   margin-top: 10px;
+  margin-right: 40px;
 }
 
 .logo {
@@ -32,25 +40,37 @@ header p {
 
 article {
   clear: both;
-  margin-top: 40px;
+  margin-top: 160px;
+}
+
+.controlbar {
+  margin-top: 30px;
+  padding-bottom: 10px;
+  width: 640px;
 }
 
 .controlbar select {
   font-size: 20px;
-  width: 300px;
+  width: 240px;
 }
 
 .controlbar .deleteall {
   float: right;
 }
 
-table {
+table.triggerwords {
   cursor: default;
   border-collapse: collapse;
   border-spacing: 0;
+  margin-bottom: 100px;
   margin-top: 10px;
   width: 100%;
   -webkit-user-select: none;
+}
+
+thead {
+  position: fixed;
+  width: 640px;
 }
 
 th {
@@ -65,9 +85,22 @@ th, td {
   white-space: nowrap;
 }
 
-th.friendname {
-  width: 300px;
+.friendname {
+  max-width: 200px;
+  min-width: 200px;
+  width: 200px;
 }
+.triggerword {
+  max-width: 280px;
+  min-width: 280px;
+  width: 280px;
+}
+.controlcell {
+  max-width: 40px;
+  min-width: 40px;
+  width: 40px;
+}
+
 
 tr:hover {
   background: lightcyan;
@@ -88,6 +121,25 @@ tr:hover .delword {
   visibility: visible;
 }
 
+footer {
+  background: white;
+  bottom: 0;
+  font-size: 12px;
+  line-height: 16px;
+  padding-bottom: 10px;
+  padding-top: 40px;
+  position: fixed;
+  text-align: center;
+  width: 640px;
+}
 
+footer label {
+  font-weight: bold;
+}
+
+footer .copyright {
+  color: #aaa;
+  margin-top: 10px;
+}
 
 

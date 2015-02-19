@@ -17,9 +17,7 @@
       <div class="logo"></div>
       <h1>Occasional Idiot</h1>
       <p>Browser plugin selectively hides your friends' posts when they're occasionally being idiots.</p>
-    </header>
-    
-    <article>
+
       <div class="controlbar">
         <button class="deleteall" data-ng-click="deleteAll()">
           Delete all
@@ -28,24 +26,44 @@
         <select data-ng-model="currentFriend"
             data-ng-options="friend as friend.name for friend in appFriends"></select>
       </div>
-
-      <table>
+    </header>
+    
+    <article>
+      <table class="triggerwords">
         <thead>
           <tr>
             <th class="friendname">Name</th>
             <th class="triggerword">Trigger word</th>
-            <th class="controls"></th>
+            <th class="controlcell"></th>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
           <tr data-ng-repeat="word in appWords"
-              data-ng-if="word.friend == currentFriend.name || currentFriend == allFriend">
-            <td>{{word.friend}}</td>
-            <td>{{word.word}}</td>
-            <td><div class="delword" data-ng-click="deleteWord(word)"></div></td>
+              data-ng-if="currentFriend == allFriend || word.friend == currentFriend.name">
+            <td class="friendname">{{word.friend}}</td>
+            <td class="triggerword">{{word.word}}</td>
+            <td class="controlcell"><div class="delword" data-ng-click="deleteWord(word)"></div></td>
           </tr>
         </tbody>
       </table>
     </article>
+    
+    <footer>
+      <div>
+        <label>Homepage:</label>
+        <a href="http://occasionalidiot.com">http://occasionalidiot.com</a>
+      </div>
+      <div>
+        <label>Github:</label>
+        <a href="https://github.com/omedalus/occasionalidiot">https://github.com/omedalus/occasionalidiot</a>
+      </div>
+      
+      <div class="copyright">
+        Copyright &copy; 2015 Mikhail Voloshin. All rights reserved.
+      </div>
+    </footer>
   </body>
 </html>
