@@ -92,9 +92,17 @@ occasionalIdiotApp.run(['$rootScope', function($rootScope) {
         delete blacklist[word.friend].words[word.word];
         chrome.storage.sync.set({blacklist: blacklist}, function() {
           loadStorage();
+          chrome.runtime.sendMessage({reload: true});
         });
     });
   };
+
+  // Set up a listener to receive messages from extension.
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.reprocessPage) {
+      loadStorage();
+    }
+  });
 
   loadStorage();
 }]);

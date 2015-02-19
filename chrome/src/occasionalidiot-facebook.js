@@ -242,6 +242,8 @@ var processAllChildNodes = function(node) {
 
 
 var reprocessPage = function() {
+  console.log('reprocessing page');
+
   // Process posts.
   processAllChildNodes(document);
 };
@@ -259,6 +261,9 @@ document.addEventListener('DOMNodeInserted', function(event) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.reprocessPage) {
     reprocessPage();
+  }
+  if (request.reloadPage) {
+    location.reload();
   }
 });
 

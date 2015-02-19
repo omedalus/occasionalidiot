@@ -4,10 +4,11 @@
 // Copyright (c) 2015 Mikhail Voloshin. All rights reserved.
 
 
-var commandAllContentReload = function() {
+var commandAllContentReload = function(reload) {
   chrome.tabs.query({}, function(tabs) {
     for (var iTab = 0; iTab < tabs.length; iTab++) {
-      chrome.tabs.sendMessage(tabs[iTab].id, {reprocessPage: true});
+      chrome.tabs.sendMessage(tabs[iTab].id, 
+          {reprocessPage: true, reloadPage: reload});
     }
   });
 };
@@ -39,7 +40,6 @@ var editWordOnPersonBlacklist = function(person, word, isKeeping) {
       delete personBlacklistWords[word];
     }
     
-    console.log(blacklist);
     chrome.storage.sync.set({blacklist: blacklist}, function() {
       commandAllContentReload();
     });
@@ -141,6 +141,8 @@ var lastRequest = null;
 
 // Set up a listener to receive messages from the context page.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+console.log(request);
+
   if (request.poster) {
     request.poster = request.poster.trim();
   }
@@ -150,9 +152,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.selection) {
     request.selection = request.selection.trim();
   }
-    
+
   lastRequest = request;
-  
+
   if (request.contextMenu) {
     chrome.contextMenus.removeAll();
 
@@ -162,6 +164,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
     
     createCommonMenus();
+  }
+
+  if (request.reload) {
+    commandAllContentReload(true);
   }
 });
 
