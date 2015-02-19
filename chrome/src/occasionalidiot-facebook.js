@@ -67,50 +67,55 @@ var processWallPost = function(postNode) {
 
     // The poster's full name is buried in an h5 element.
     // We'll use it as the key.
-    var username = postNode.getElementsByTagName('h5')[0].
-        getElementsByTagName('a')[0].
-        innerText.trim();
+    var username;
+    try {
+      username = postNode.getElementsByTagName('h5')[0].
+          getElementsByTagName('a')[0].
+          innerText.trim();
+    } catch(ex) {
+    }
+
+    if (username) {
+      // Annotate this element so our lookup can be much faster next time,
+      // and wire up event handlers.
+      if (!postNode.classList.contains(APP_POST_DIV_CLASSNAME)) {
+        postNode.classList.add(APP_POST_DIV_CLASSNAME);
+        postNode.setAttribute(APP_POST_USER_ATTRNAME, username);
         
-    // Annotate this element so our lookup can be much faster next time,
-    // and wire up event handlers.
-    if (!postNode.classList.contains(APP_POST_DIV_CLASSNAME)) {
-      postNode.classList.add(APP_POST_DIV_CLASSNAME);
-      postNode.setAttribute(APP_POST_USER_ATTRNAME, username);
-      
-      // Set up event handling so that the background task (which runs the context
-      // menu) knows which user was right-clicked on.
-      postNode.addEventListener('mousedown', function(event) {
-        if (event.button === 2) {
-          // Right click.
-          updateExtensionContext(username, null);
+        // Set up event handling so that the background task (which runs the context
+        // menu) knows which user was right-clicked on.
+        postNode.addEventListener('mousedown', function(event) {
+          if (event.button === 2) {
+            // Right click.
+            updateExtensionContext(username, null);
+          }
+        });
+      }
+
+      // Look up the blacklist collection.
+      chrome.storage.sync.get('blacklist', function(response) {
+        var blacklist = response.blacklist;
+        if (!blacklist || !blacklist[username]) {
+          // This poster doesn't have a blacklist.
+          return;
+        }
+
+        // Gather up all the post's text and comments 
+        // (or at least currently available comments).
+        var allPostText = postNode.innerText.toUpperCase();
+        var userBlacklistWords = blacklist[username].words;
+
+        for (var key in  userBlacklistWords) {
+          var blacklistWord = key.toUpperCase();
+          if (allPostText.indexOf(blacklistWord) != -1) {
+            // The post or one of its comments contains a word that's been
+            // blacklisted for the original poster. Kill the whole post.
+            postNode.style.display = 'none';
+          }
         }
       });
     }
-    
-    // Look up the blacklist collection.
-    chrome.storage.sync.get('blacklist', function(response) {
-      var blacklist = response.blacklist;
-      
-      if (!blacklist || !blacklist[username]) {
-        // This poster doesn't have a blacklist.
-        return;
-      }
-      
-      // Gather up all the post's text and comments 
-      // (or at least currently available comments).
-      var allPostText = postNode.innerText.toUpperCase();
-      var userBlacklistWords = blacklist[username].words;
-      
-      for (var key in  userBlacklistWords) {
-        var blacklistWord = key.toUpperCase();
-        if (allPostText.indexOf(blacklistWord) != -1) {
-          // The post or one of its comments contains a word that's been
-          // blacklisted for the original poster. Kill the whole post.
-          postNode.style.display = 'none';
-        }
-      }
-    });
-    
+
     processAllChildCommentNodes(postNode);
   //} catch(ex) {
   //}

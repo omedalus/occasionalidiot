@@ -1,6 +1,8 @@
 body {
   color: #444;
   font-family: Arial;
+  font-size: 16px;
+  line-height: 22px;
   margin: auto;
   padding: 20px 0;
   width: 640px;
@@ -8,7 +10,7 @@ body {
 
 h1 {
   font-size: 40px;
-  line-height: 80px;
+  line-height: 60px;
   margin: 0;
   text-shadow: 1px 1px 0 #ccc;
 }
@@ -16,7 +18,7 @@ h1 {
 header p {
   color: #888;
   font-weight: bold;
-  margin-top: .5em;
+  margin-top: 10px;
 }
 
 .logo {
@@ -27,3 +29,43 @@ header p {
   margin-right: 20px;
   width: 128px;
 }
+
+article {
+  clear: both;
+  margin-top: 40px;
+}
+
+.controlbar select {
+  font-size: 20px;
+  width: 300px;
+}
+
+table {
+  cursor: default;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+th {
+  background: silver;
+  text-align: left;
+  text-shadow: 1px 1px 0 white;
+}
+
+th, td {
+  padding: 5px 20px;
+  overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th.friendname {
+  width: 300px;
+}
+
+tr:hover {
+  background: lightcyan;
+}
+
+

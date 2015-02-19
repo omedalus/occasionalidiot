@@ -14,14 +14,16 @@ var commandAllContentReload = function() {
 
 
 var editWordOnPersonBlacklist = function(person, word, isKeeping) {
-  chrome.storage.sync.get('blacklist', function(blacklist) {
+  chrome.storage.sync.get('blacklist', function(response) {
+    var blacklist = response.blacklist;
+
     if (!blacklist) {
       blacklist = {};
     }
     
     var personBlacklist = blacklist[person];
     if (!personBlacklist) {
-      personBlacklist = {};
+      personBlacklist = {name: person};
       blacklist[person] = personBlacklist;
     }
     
@@ -37,6 +39,7 @@ var editWordOnPersonBlacklist = function(person, word, isKeeping) {
       delete personBlacklistWords[word];
     }
     
+    console.log(blacklist);
     chrome.storage.sync.set({blacklist: blacklist}, function() {
       commandAllContentReload();
     });
@@ -177,6 +180,16 @@ var showAddWordPopup = function(person) {
   editWordOnPersonBlacklist(person, word, true);
 };
 
+var APP_OPTIONS_PAGE_URL = 'occasionalidiot-options.html';
+
+var showOptionsPage = function(person) {
+  chrome.tabs.create({
+    url: APP_OPTIONS_PAGE_URL
+  }, function(tab) {
+  
+  });
+};
+
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
   if (info.menuItemId === CTXMENU_POSTER_SELECTED_TOPIC) {
     editWordOnPersonBlacklist(lastRequest.poster,
@@ -187,6 +200,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
     showAddWordPopup(lastRequest.poster);
   }
   else if (info.menuItemId === CTXMENU_POSTER_VIEW_BLACKLIST) {
+    showOptionsPage(lastRequest.poster);
   }
   else if (info.menuItemId === CTXMENU_COMMENTER_SELECTED_TOPIC) {
     editWordOnPersonBlacklist(lastRequest.commenter,
@@ -197,8 +211,10 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
     showAddWordPopup(lastRequest.commenter);
   }
   else if (info.menuItemId === CTXMENU_POSTER_VIEW_BLACKLIST) {
+    showOptionsPage(lastRequest.commenter);
   }
   else if (info.menuItemId === CTXMENU_VIEW_ALL_BLACKLISTS) {
+    showOptionsPage();
   }
 });
 

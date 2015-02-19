@@ -14,8 +14,31 @@
     <header>
       <div class="logo"></div>
       <h1>Occasional Idiot</h1>
-      <p>Browser plugin selectively hides your friends' posts when they're being idiots.</p>
-      
+      <p>Browser plugin selectively hides your friends' posts when they're occasionally being idiots.</p>      
     </header>
+    
+    <article>
+      <div class="controlbar">
+        <select data-ng-model="currentFriend"
+            data-ng-options="friend as friend.name for friend in appFriends"></select>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="friendname">Name</th>
+            <th class="triggerword">Trigger word</th>
+            <th class="controls"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-ng-repeat="word in appWords"
+              data-ng-if="word.friend == currentFriend.name || currentFriend == allFriend">
+            <td>{{word.friend}}</td>
+            <td>{{word.word}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
   </body>
 </html>

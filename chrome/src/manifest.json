@@ -1,8 +1,9 @@
 {
   "name": "Occasional Idiot",
-  "description": "Hide your friends' occasional idiotic posts",
+  "description": "Selectively hide your friends' posts when they're occasionally being idiots",
   "version": "1.0",
   "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
   "default_locale": "en",
 
@@ -30,5 +31,7 @@
 
   "background": {
     "scripts": ["background.js"]
-  }
+  },
+  
+  "options_page": "occasionalidiot-options.html"
 }
