@@ -166,8 +166,6 @@ var lastRequest = null;
 
 // Set up a listener to receive messages from the context page.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-console.log(request);
-
   if (request.poster) {
     request.poster = request.poster.trim();
   }
