@@ -1,5 +1,6 @@
 {
   "name": "Occasional Idiot",
+  "short_name": "OccasnIdiot",
   "description": "Selectively hide your friends' posts when they're occasionally being idiots",
   "version": "1.0",
   "manifest_version": 2,
